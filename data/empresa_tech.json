@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "name": "Empresa Tech Startup",
+    "description": "Red de contactos de una empresa de tecnología con diferentes departamentos y niveles jerárquicos",
+    "nodeCount": 15,
+    "edgeCount": 25
+  },
+  "nodes": [
+    { "id": "ceo", "name": "CEO - Alejandro" },
+    { "id": "cto", "name": "CTO - Beatriz" },
+    { "id": "cfo", "name": "CFO - Cristian" },
+    { "id": "dev1", "name": "Dev Senior - Diana" },
+    { "id": "dev2", "name": "Dev Senior - Eduardo" },
+    { "id": "dev3", "name": "Dev Junior - Fernanda" },
+    { "id": "dev4", "name": "Dev Junior - Gustavo" },
+    { "id": "qa1", "name": "QA Lead - Helena" },
+    { "id": "qa2", "name": "QA - Iván" },
+    { "id": "hr", "name": "HR - Julia" },
+    { "id": "mkt1", "name": "Marketing - Kevin" },
+    { "id": "mkt2", "name": "Marketing - Lucía" },
+    { "id": "fin1", "name": "Finanzas - Manuel" },
+    { "id": "fin2", "name": "Finanzas - Natalia" },
+    { "id": "intern", "name": "Practicante - Oscar" }
+  ],
+  "edges": [
+    { "source": "ceo", "target": "cto" },
+    { "source": "ceo", "target": "cfo" },
+    { "source": "ceo", "target": "hr" },
+    { "source": "cto", "target": "dev1" },
+    { "source": "cto", "target": "dev2" },
+    { "source": "cto", "target": "qa1" },
+    { "source": "dev1", "target": "dev3" },
+    { "source": "dev1", "target": "dev4" },
+    { "source": "dev2", "target": "dev3" },
+    { "source": "dev2", "target": "dev4" },
+    { "source": "dev3", "target": "dev4" },
+    { "source": "qa1", "target": "qa2" },
+    { "source": "qa1", "target": "dev1" },
+    { "source": "qa2", "target": "dev3" },
+    { "source": "cfo", "target": "fin1" },
+    { "source": "cfo", "target": "fin2" },
+    { "source": "fin1", "target": "fin2" },
+    { "source": "hr", "target": "mkt1" },
+    { "source": "hr", "target": "mkt2" },
+    { "source": "mkt1", "target": "mkt2" },
+    { "source": "hr", "target": "intern" },
+    { "source": "dev4", "target": "intern" },
+    { "source": "mkt2", "target": "intern" },
+    { "source": "dev1", "target": "qa2" },
+    { "source": "ceo", "target": "mkt1" }
+  ]
+}
