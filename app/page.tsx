@@ -21,72 +21,132 @@ import { StatsCards, SystemStatus } from '@/components/stats-cards';
 import { DailyReportPanel, SimulationSummary } from '@/components/daily-report';
 import { Button } from '@/components/ui/button';
 
-// Red de ejemplo precargada
+// Red de ejemplo precargada — 40 personas, topología realista
+// Grupos: Familia García (1-8), Trabajo TechCo (9-16), Universidad (17-24), Barrio (25-32), Gimnasio (33-40)
+// Puentes entre grupos para simular contagio inter-comunidad
 const SAMPLE_NETWORK: NetworkFileFormat = {
   metadata: {
     name: "Red Social de Medellín",
-    description: "Red de contactos simulada para demostración",
-    nodeCount: 20,
-    edgeCount: 35
+    description: "Red de contactos simulada — 40 personas, 5 grupos conectados",
+    nodeCount: 40,
+    edgeCount: 72
   },
   nodes: [
-    { id: "1", name: "Juan" },
-    { id: "2", name: "María" },
-    { id: "3", name: "Carlos" },
-    { id: "4", name: "Ana" },
-    { id: "5", name: "Pedro" },
-    { id: "6", name: "Laura" },
-    { id: "7", name: "Diego" },
-    { id: "8", name: "Sofía" },
-    { id: "9", name: "Andrés" },
-    { id: "10", name: "Camila" },
-    { id: "11", name: "Luis" },
-    { id: "12", name: "Valentina" },
-    { id: "13", name: "Miguel" },
-    { id: "14", name: "Isabella" },
-    { id: "15", name: "David" },
-    { id: "16", name: "Daniela" },
-    { id: "17", name: "Santiago" },
-    { id: "18", name: "Paula" },
-    { id: "19", name: "Felipe" },
-    { id: "20", name: "Gabriela" }
+    // Grupo 1: Familia García
+    { id: "1",  name: "Juan García" },
+    { id: "2",  name: "María García" },
+    { id: "3",  name: "Carlos García" },
+    { id: "4",  name: "Ana García" },
+    { id: "5",  name: "Pedro García" },
+    { id: "6",  name: "Laura García" },
+    { id: "7",  name: "Diego García" },
+    { id: "8",  name: "Sofía García" },
+    // Grupo 2: Trabajo TechCo
+    { id: "9",  name: "Andrés Reyes" },
+    { id: "10", name: "Camila Reyes" },
+    { id: "11", name: "Luis Reyes" },
+    { id: "12", name: "Valentina Cruz" },
+    { id: "13", name: "Miguel Cruz" },
+    { id: "14", name: "Isabella Cruz" },
+    { id: "15", name: "David Cruz" },
+    { id: "16", name: "Daniela Cruz" },
+    // Grupo 3: Universidad
+    { id: "17", name: "Santiago López" },
+    { id: "18", name: "Paula López" },
+    { id: "19", name: "Felipe López" },
+    { id: "20", name: "Gabriela López" },
+    { id: "21", name: "Tomás Vargas" },
+    { id: "22", name: "Lucía Vargas" },
+    { id: "23", name: "Mateo Vargas" },
+    { id: "24", name: "Valeria Vargas" },
+    // Grupo 4: Barrio Laureles
+    { id: "25", name: "Samuel Mora" },
+    { id: "26", name: "Manuela Mora" },
+    { id: "27", name: "Julián Mora" },
+    { id: "28", name: "Sara Mora" },
+    { id: "29", name: "Nicolás Ríos" },
+    { id: "30", name: "Mariana Ríos" },
+    { id: "31", name: "Emilio Ríos" },
+    { id: "32", name: "Catalina Ríos" },
+    // Grupo 5: Gimnasio
+    { id: "33", name: "Sebastián Torres" },
+    { id: "34", name: "Natalia Torres" },
+    { id: "35", name: "Alejandro Torres" },
+    { id: "36", name: "Paola Torres" },
+    { id: "37", name: "Cristian Ruiz" },
+    { id: "38", name: "Melissa Ruiz" },
+    { id: "39", name: "Esteban Ruiz" },
+    { id: "40", name: "Diana Ruiz" }
   ],
   edges: [
-    { source: "1", target: "2" },
-    { source: "1", target: "3" },
-    { source: "1", target: "5" },
-    { source: "2", target: "4" },
-    { source: "2", target: "6" },
-    { source: "3", target: "4" },
-    { source: "3", target: "7" },
-    { source: "4", target: "8" },
-    { source: "5", target: "6" },
-    { source: "5", target: "9" },
-    { source: "6", target: "10" },
-    { source: "7", target: "8" },
-    { source: "7", target: "11" },
-    { source: "8", target: "12" },
-    { source: "9", target: "10" },
-    { source: "9", target: "13" },
-    { source: "10", target: "14" },
-    { source: "11", target: "12" },
-    { source: "11", target: "15" },
-    { source: "12", target: "16" },
-    { source: "13", target: "14" },
-    { source: "13", target: "17" },
-    { source: "14", target: "18" },
+    // Conexiones internas — Grupo 1 (Familia García)
+    { source: "1",  target: "2"  },
+    { source: "1",  target: "3"  },
+    { source: "2",  target: "4"  },
+    { source: "3",  target: "5"  },
+    { source: "4",  target: "6"  },
+    { source: "5",  target: "7"  },
+    { source: "6",  target: "8"  },
+    { source: "7",  target: "8"  },
+    { source: "2",  target: "5"  },
+    { source: "3",  target: "6"  },
+    // Conexiones internas — Grupo 2 (TechCo)
+    { source: "9",  target: "10" },
+    { source: "9",  target: "11" },
+    { source: "10", target: "12" },
+    { source: "11", target: "13" },
+    { source: "12", target: "14" },
+    { source: "13", target: "15" },
+    { source: "14", target: "16" },
     { source: "15", target: "16" },
-    { source: "15", target: "19" },
-    { source: "16", target: "20" },
+    { source: "10", target: "13" },
+    { source: "11", target: "14" },
+    // Conexiones internas — Grupo 3 (Universidad)
     { source: "17", target: "18" },
     { source: "17", target: "19" },
     { source: "18", target: "20" },
-    { source: "19", target: "20" },
-    { source: "1", target: "10" },
-    { source: "2", target: "11" },
-    { source: "5", target: "15" },
-    { source: "7", target: "17" },
-    { source: "3", target: "13" }
+    { source: "19", target: "21" },
+    { source: "20", target: "22" },
+    { source: "21", target: "23" },
+    { source: "22", target: "24" },
+    { source: "23", target: "24" },
+    { source: "18", target: "21" },
+    { source: "19", target: "22" },
+    // Conexiones internas — Grupo 4 (Barrio)
+    { source: "25", target: "26" },
+    { source: "25", target: "27" },
+    { source: "26", target: "28" },
+    { source: "27", target: "29" },
+    { source: "28", target: "30" },
+    { source: "29", target: "31" },
+    { source: "30", target: "32" },
+    { source: "31", target: "32" },
+    { source: "26", target: "29" },
+    { source: "27", target: "30" },
+    // Conexiones internas — Grupo 5 (Gimnasio)
+    { source: "33", target: "34" },
+    { source: "33", target: "35" },
+    { source: "34", target: "36" },
+    { source: "35", target: "37" },
+    { source: "36", target: "38" },
+    { source: "37", target: "39" },
+    { source: "38", target: "40" },
+    { source: "39", target: "40" },
+    { source: "34", target: "37" },
+    { source: "35", target: "38" },
+    // Puentes inter-grupo (contactos cruzados que permiten contagio entre comunidades)
+    { source: "3",  target: "9"  },  // Familia → TechCo
+    { source: "5",  target: "17" },  // Familia → Universidad
+    { source: "12", target: "25" },  // TechCo  → Barrio
+    { source: "16", target: "33" },  // TechCo  → Gimnasio
+    { source: "20", target: "29" },  // Universidad → Barrio
+    { source: "24", target: "36" },  // Universidad → Gimnasio
+    { source: "28", target: "34" },  // Barrio   → Gimnasio
+    { source: "8",  target: "16" },  // Familia → TechCo (extra)
+    { source: "23", target: "31" },  // Universidad → Barrio (extra)
+    { source: "40", target: "32" },  // Gimnasio → Barrio (extra)
+    { source: "11", target: "20" },  // TechCo  → Universidad (extra)
+    { source: "6",  target: "26" }   // Familia → Barrio (extra)
   ]
 };
 
@@ -291,7 +351,7 @@ export default function EpidemiaSimulator() {
               onClick={() => handleLoadNetwork(SAMPLE_NETWORK)}
             >
               <Zap className="w-4 h-4" />
-              Cargar red de ejemplo
+              Cargar red ejemplo (40 nodos)
             </Button>
           </div>
 

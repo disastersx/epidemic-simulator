@@ -504,6 +504,108 @@ La interfaz principal muestra:
 
 ---
 
+---
+
+## Guia para la Sustentacion Oral (8-10 minutos)
+
+### Estructura de la Presentacion
+
+#### Minuto 0-1: Introduccion (1 min)
+**Que decir:**
+> "Buenas, somos [nombres] y les vamos a presentar EPIDEMIA, un simulador de propagacion de enfermedades. Despues de vivir la pandemia de COVID, quisimos entender como se propagan las enfermedades en una poblacion usando estructuras de datos."
+
+**Mostrar:** La pantalla principal del simulador ya cargada.
+
+---
+
+#### Minuto 1-3: Explicacion del Modelo (2 min)
+**Que decir:**
+> "Modelamos el problema como un grafo no dirigido donde cada nodo es una persona y cada arista representa un contacto fisico. Cada persona puede estar en uno de tres estados: Susceptible (azul), Infectado (rojo) o Recuperado (verde). Esto se llama el modelo SIR."
+
+**Mostrar:** 
+- Senalar los nodos de diferentes colores en el grafo
+- Explicar que las lineas son los contactos entre personas
+
+**Estructuras de datos (IMPORTANTE - esto es lo que evaluan):**
+> "Usamos una lista de adyacencia implementada con un Map de JavaScript donde cada nodo apunta a un Set de sus vecinos. Esto nos da O(1) para buscar conexiones. Tambien usamos un arreglo para almacenar los nodos y otro arreglo como cola para el algoritmo BFS."
+
+---
+
+#### Minuto 3-7: Demostracion en Vivo (4 min)
+
+**Paso 1 - Cargar la red:**
+> "Primero cargamos una red de contactos. Tenemos una red de ejemplo con 40 personas divididas en 5 grupos: una familia, una empresa, un salon de universidad, un barrio y un gimnasio."
+
+*Click en "Cargar red ejemplo (40 nodos)"*
+
+**Paso 2 - Seleccionar infectados:**
+> "Ahora seleccionamos quien se infecta primero. Vamos a infectar a Juan Garcia de la familia."
+
+*Click en el nodo de Juan Garcia*
+
+**Paso 3 - Configurar parametros:**
+> "Configuramos la tasa de contagio en 40% y los dias de recuperacion en 5. Esto significa que cada infectado tiene 40% de probabilidad de contagiar a cada vecino por dia."
+
+*Mover los sliders*
+
+**Paso 4 - Simular paso a paso:**
+> "Ahora simulamos dia por dia. Vean como el virus se propaga usando BFS - primero infecta a los vecinos directos y luego va expandiendose."
+
+*Click en "+1 Dia" varias veces, mostrando como se propaga*
+
+> "Miren como el virus salto de la familia a la empresa por el nodo puente que los conecta."
+
+**Paso 5 - Simular automatico:**
+> "Podemos dejarlo correr automaticamente hasta que no queden infectados."
+
+*Click en "Auto"*
+
+**Paso 6 - Mostrar graficos:**
+> "Aqui vemos la curva SIR clasica de epidemiologia. El pico de infectados fue en el dia X y el R0 estimado fue de Y."
+
+*Senalar los graficos de evolucion*
+
+---
+
+#### Minuto 7-9: Analisis Tecnico (2 min)
+
+**Complejidad del algoritmo:**
+> "El algoritmo principal simulateOneDay usa BFS y tiene complejidad O(I por d) donde I es el numero de infectados y d es el grado promedio. Esto es eficiente porque no recorremos toda la red, solo los infectados y sus vecinos."
+
+**Por que estas estructuras:**
+> "Elegimos lista de adyacencia en vez de matriz porque nuestra red es dispersa - cada persona tiene pocos contactos comparado con el total. Una matriz usaria O(n cuadrado) memoria mientras que nosotros usamos O(n + m)."
+
+---
+
+#### Minuto 9-10: Conclusiones (1 min)
+
+**Que decir:**
+> "En conclusion, logramos implementar todas las operaciones pedidas: cargar red desde archivo, definir infectados iniciales, configurar parametros, simular dia a dia con BFS, simular hasta estabilizacion y generar reportes con graficos."
+
+> "Como mejoras futuras podriamos agregar el periodo de incubacion, vacunacion, o importar redes reales de contactos."
+
+> "Gracias, quedamos atentos a preguntas."
+
+---
+
+### Tips para la Sustentacion
+
+1. **Practica la demo antes:** Asegurate de que todo funcione. Ten la red cargada de antemano.
+
+2. **Si algo falla:** Recarga la pagina y vuelve a cargar la red de ejemplo. Siempre funciona.
+
+3. **Preguntas comunes que te pueden hacer:**
+   - "Por que usaron lista de adyacencia?" → Porque es eficiente para grafos dispersos
+   - "Cual es la complejidad del BFS?" → O(V + E) pero nosotros solo recorremos desde los infectados
+   - "Que pasa si la tasa es 100%?" → Todos se infectan eventualmente si la red es conexa
+   - "Como calculan R0?" → Promedio de nuevos infectados dividido por los infectados que los causaron
+
+4. **Divide la presentacion:** Uno explica el modelo y estructuras, el otro hace la demo en vivo.
+
+5. **Habla con confianza:** Vos hiciste el codigo, vos lo entendes.
+
+---
+
 ## Referencias
 
 - Kermack, W. O., & McKendrick, A. G. (1927). A contribution to the mathematical theory of epidemics.

@@ -122,16 +122,30 @@ export function GraphVisualizer({
     // Crear mapa de nodos para acceso rápido
     const nodeMap = new Map(nodeData.map(n => [n.id, n]));
 
-    // Crear simulación de fuerzas
+    // Calcular parámetros adaptativos según el tamaño de la red
+    const n = nodeData.length;
+    const linkDistance = n > 30 ? 60 : n > 20 ? 75 : 90;
+    const chargeStrength = n > 30 ? -320 : n > 20 ? -260 : -200;
+    const collideRadius = n > 30 ? 26 : 30;
+
+    // Crear simulación de fuerzas con parámetros adaptativos
     const simulation = d3.forceSimulation(nodeData)
       .force('link', d3.forceLink<GraphNode, GraphEdge>(edgeData)
         .id(d => d.id)
-        .distance(80)
-        .strength(0.5)
+        .distance(linkDistance)
+        .strength(0.6)
       )
-      .force('charge', d3.forceManyBody().strength(-200))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(30));
+      .force('charge', d3.forceManyBody()
+        .strength(chargeStrength)
+        .distanceMin(20)
+        .distanceMax(400)
+      )
+      .force('center', d3.forceCenter(width / 2, height / 2).strength(0.08))
+      .force('collision', d3.forceCollide().radius(collideRadius).strength(0.9))
+      .force('x', d3.forceX(width / 2).strength(0.04))
+      .force('y', d3.forceY(height / 2).strength(0.04))
+      .alphaDecay(0.02)
+      .velocityDecay(0.4);
 
     simulationRef.current = simulation;
 
@@ -169,10 +183,16 @@ export function GraphVisualizer({
         })
       );
 
+    // Radio adaptativo según tamaño de la red
+    const nodeRadius = n > 30 ? 10 : 12;
+    const pulseRadius = nodeRadius + 8;
+    const labelOffset = nodeRadius + 16;
+    const labelFontSize = n > 30 ? '9px' : '10px';
+
     // Círculo de fondo para efecto de pulsación
     nodeGroups.append('circle')
       .attr('class', 'pulse-ring')
-      .attr('r', 20)
+      .attr('r', pulseRadius)
       .attr('fill', 'none')
       .attr('stroke', d => STATE_COLORS[d.state])
       .attr('stroke-width', 2)
@@ -181,21 +201,21 @@ export function GraphVisualizer({
     // Círculo principal del nodo
     nodeGroups.append('circle')
       .attr('class', 'node-circle')
-      .attr('r', 12)
+      .attr('r', nodeRadius)
       .attr('fill', d => STATE_COLORS[d.state])
       .attr('stroke', d => selectedNodes.includes(d.id) ? '#fff' : 'transparent')
-      .attr('stroke-width', 3)
+      .attr('stroke-width', 2.5)
       .attr('filter', d => `url(#glow-${d.state})`);
 
-    // Etiqueta del nodo
+    // Etiqueta del nodo — solo primer nombre para que no se solapen
     nodeGroups.append('text')
       .attr('class', 'node-label')
-      .attr('dy', 28)
+      .attr('dy', labelOffset)
       .attr('text-anchor', 'middle')
-      .attr('font-size', '10px')
+      .attr('font-size', labelFontSize)
       .attr('fill', '#94a3b8')
       .attr('font-family', 'Geist Mono, monospace')
-      .text(d => d.name.length > 8 ? d.name.substring(0, 8) + '...' : d.name);
+      .text(d => d.name.split(' ')[0]);
 
     // Eventos de interacción
     nodeGroups
@@ -209,7 +229,7 @@ export function GraphVisualizer({
           .select('.node-circle')
           .transition()
           .duration(200)
-          .attr('r', 16);
+          .attr('r', nodeRadius + 4);
       })
       .on('mouseleave', (event) => {
         setHoveredNode(null);
@@ -217,20 +237,20 @@ export function GraphVisualizer({
           .select('.node-circle')
           .transition()
           .duration(200)
-          .attr('r', 12);
+          .attr('r', nodeRadius);
       });
 
-    // Animación de pulsación para infectados
+    // Animación de pulsación para infectados con radio adaptativo
     const pulseAnimation = () => {
       nodeGroups.selectAll('.pulse-ring')
         .filter((d: any) => d.state === 'infected')
         .transition()
         .duration(1000)
-        .attr('r', 25)
+        .attr('r', pulseRadius + 12)
         .attr('opacity', 0)
         .transition()
         .duration(0)
-        .attr('r', 12)
+        .attr('r', pulseRadius)
         .attr('opacity', 0.5)
         .on('end', pulseAnimation);
     };
