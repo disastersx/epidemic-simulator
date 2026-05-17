@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPIDEMIA - Documentacion Tecnica</title>
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --accent-green: #22c55e;
+      --accent-purple: #a855f7;
+      --border-color: #2a2a3a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-blue { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+    .badge-green { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+    .badge-red { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+    .badge-purple { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
+
+    /* Team */
+    .team-section {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+    }
+
+    .team-section h3 {
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .team-members {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .member {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .member-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Sections */
+    .section {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section h2 .icon {
+      font-size: 1.75rem;
+    }
+
+    .section h3 {
+      font-size: 1.15rem;
+      margin: 1.5rem 0 0.75rem 0;
+      color: var(--accent-blue);
+    }
+
+    .section h4 {
+      font-size: 1rem;
+      margin: 1rem 0 0.5rem 0;
+      color: var(--accent-purple);
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .section ul, .section ol {
+      color: var(--text-secondary);
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Code blocks */
+    pre {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      background: var(--bg-primary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--accent-green);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    /* Diagrams */
+    .diagram {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85rem;
+      white-space: pre;
+      overflow-x: auto;
+      line-height: 1.4;
+      color: var(--text-secondary);
+    }
+
+    /* Cards grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .card h4 {
+      color: var(--text-primary);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .card-blue { border-left: 3px solid var(--accent-blue); }
+    .card-red { border-left: 3px solid var(--accent-red); }
+    .card-green { border-left: 3px solid var(--accent-green); }
+
+    /* Complexity badges */
+    .complexity {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    .complexity-good { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+    .complexity-ok { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+    /* TOC */
+    .toc {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .toc h3 {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    /* Screenshots placeholder */
+    .screenshot {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      color: var(--text-secondary);
+      margin: 1rem 0;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Sustentacion timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      border: 2px solid var(--bg-secondary);
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      color: var(--accent-purple);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    blockquote {
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent-purple);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .section {
+        background: white;
+        border: 1px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Header -->
+    <header class="header">
+      <h1>EPIDEMIA</h1>
+      <p class="subtitle">Simulador de Propagacion de Enfermedades con Modelo SIR</p>
+      <div class="badges">
+        <span class="badge badge-blue">Estructuras de Datos</span>
+        <span class="badge badge-red">Modelo SIR</span>
+        <span class="badge badge-green">BFS Algorithm</span>
+        <span class="badge badge-purple">Next.js + D3.js</span>
+      </div>
+    </header>
+
+    <!-- Team -->
+    <div class="team-section">
+      <h3>Integrantes del Equipo</h3>
+      <div class="team-members">
+        <div class="member">
+          <div class="member-avatar">1</div>
+          <div>
+            <strong>[Tu Nombre Aqui]</strong><br>
+            <small style="color: var(--text-secondary)">Universidad - Medellin</small>
+          </div>
+        </div>
+        <div class="member">
+          <div class="member-avatar">2</div>
+          <div>
+            <strong>[Nombre Companero]</strong><br>
+            <small style="color: var(--text-secondary)">Universidad - Medellin</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <nav class="toc">
+      <h3>Tabla de Contenidos</h3>
+      <ul>
+        <li><a href="#descripcion">1. Descripcion del Problema</a></li>
+        <li><a href="#modelado">2. Modelado del Problema</a></li>
+        <li><a href="#estructuras">3. Estructuras de Datos</a></li>
+        <li><a href="#operaciones">4. Operaciones Implementadas</a></li>
+        <li><a href="#pruebas">5. Casos de Prueba</a></li>
+        <li><a href="#diagramas">6. Diagramas</a></li>
+        <li><a href="#ejecucion">7. Instrucciones de Ejecucion</a></li>
+        <li><a href="#limitaciones">8. Limitaciones y Mejoras</a></li>
+        <li><a href="#sustentacion">9. Guia de Sustentacion</a></li>
+      </ul>
+    </nav>
+
+    <!-- 1. Descripcion -->
+    <section class="section" id="descripcion">
+      <h2><span class="icon">1.</span> Descripcion del Problema</h2>
+      
+      <h3>Contexto</h3>
+      <p>
+        Despues de vivir la pandemia del COVID-19, entendimos la importancia de modelar como se propagan 
+        las enfermedades infecciosas en una poblacion. Este proyecto implementa un simulador que permite 
+        visualizar y analizar la propagacion de una epidemia usando el modelo epidemiologico SIR 
+        (Susceptible-Infectado-Recuperado).
+      </p>
+
+      <h3>Motivacion</h3>
+      <p>
+        Las pandemias han demostrado ser uno de los mayores desafios de salud publica. Comprender como 
+        se propaga una enfermedad permite tomar decisiones informadas sobre medidas de contencion, 
+        vacunacion y distanciamiento social. Este simulador permite experimentar con diferentes 
+        parametros y observar sus efectos en tiempo real.
+      </p>
+
+      <h3>Objetivos</h3>
+      <ul>
+        <li>Modelar una red de contactos como un grafo no dirigido</li>
+        <li>Implementar el modelo SIR para simular estados de salud</li>
+        <li>Visualizar la propagacion usando algoritmo BFS</li>
+        <li>Generar reportes y graficos de la evolucion de la epidemia</li>
+      </ul>
+    </section>
+
+    <!-- 2. Modelado -->
+    <section class="section" id="modelado">
+      <h2><span class="icon">2.</span> Modelado del Problema</h2>
+
+      <h3>El Grafo de Contactos</h3>
+      <p>
+        Modelamos la poblacion como un <strong>grafo no dirigido G = (V, E)</strong> donde:
+      </p>
+
+      <div class="cards-grid">
+        <div class="card card-blue">
+          <h4>Nodos (V)</h4>
+          <p>Cada nodo representa una persona de la poblacion. Tiene un ID unico, nombre y un estado de salud.</p>
+        </div>
+        <div class="card card-green">
+          <h4>Aristas (E)</h4>
+          <p>Cada arista representa un contacto fisico entre dos personas. Son no dirigidas (si A contacta a B, B contacta a A).</p>
+        </div>
+        <div class="card card-red">
+          <h4>Sin Pesos</h4>
+          <p>Las aristas no tienen peso. Todos los contactos tienen la misma probabilidad de contagio.</p>
+        </div>
+      </div>
+
+      <h3>Estados del Modelo SIR</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Color</th>
+            <th>Descripcion</th>
+            <th>Transiciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Susceptible (S)</strong></td>
+            <td style="color: #3b82f6;">Azul</td>
+            <td>Persona sana que puede infectarse</td>
+            <td>S → I (con probabilidad p al contacto con infectado)</td>
+          </tr>
+          <tr>
+            <td><strong>Infectado (I)</strong></td>
+            <td style="color: #ef4444;">Rojo</td>
+            <td>Persona enferma que puede contagiar</td>
+            <td>I → R (despues de d dias)</td>
+          </tr>
+          <tr>
+            <td><strong>Recuperado (R)</strong></td>
+            <td style="color: #22c55e;">Verde</td>
+            <td>Persona recuperada e inmune</td>
+            <td>Estado final (no hay transiciones)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Diagrama del Modelo</h3>
+      <div class="diagram">
+                    Tasa de contagio (p)
+                           |
+                           v
+    +-------------+    contacto    +-------------+    d dias    +-------------+
+    | SUSCEPTIBLE | ------------> |  INFECTADO  | -----------> | RECUPERADO  |
+    |    (Azul)   |               |    (Rojo)   |              |   (Verde)   |
+    +-------------+               +-------------+              +-------------+
+          |                             |                            |
+          |    Puede infectarse         |   Puede contagiar          |   Inmune
+          |    si tiene contacto        |   a sus vecinos            |   (estado final)
+          |    con infectado            |   susceptibles             |
+          +-----------------------------+----------------------------+
+      </div>
+    </section>
+
+    <!-- 3. Estructuras de Datos -->
+    <section class="section" id="estructuras">
+      <h2><span class="icon">3.</span> Estructuras de Datos Utilizadas</h2>
+
+      <h3>3.1 Lista de Adyacencia (Estructura Principal del Grafo)</h3>
+      <p>
+        Implementamos el grafo usando una <strong>lista de adyacencia</strong> con la estructura 
+        <code>Map&lt;string, Set&lt;string&gt;&gt;</code> de JavaScript.
+      </p>
+
+      <h4>Justificacion</h4>
+      <ul>
+        <li><strong>Eficiencia en espacio:</strong> O(V + E) vs O(V^2) de matriz de adyacencia</li>
+        <li><strong>Redes dispersas:</strong> En redes sociales reales, cada persona tiene pocos contactos comparado con el total</li>
+        <li><strong>Acceso rapido:</strong> O(1) para verificar si existe una arista usando Set</li>
+        <li><strong>Iteracion eficiente:</strong> Recorrer vecinos de un nodo es O(grado)</li>
+      </ul>
+
+      <pre>
+// Implementacion de la lista de adyacencia
+private adjacencyList: Map&lt;string, Set&lt;string&gt;&gt; = new Map();
+
+// Agregar arista (no dirigida)
+addEdge(source: string, target: string): void {
+  if (!this.adjacencyList.has(source)) {
+    this.adjacencyList.set(source, new Set());
+  }
+  if (!this.adjacencyList.has(target)) {
+    this.adjacencyList.set(target, new Set());
+  }
+  this.adjacencyList.get(source)!.add(target);
+  this.adjacencyList.get(target)!.add(source);
+}
+
+// Obtener vecinos
+getNeighbors(nodeId: string): string[] {
+  return Array.from(this.adjacencyList.get(nodeId) || []);
+}</pre>
+
+      <h3>3.2 Arreglo de Nodos (nodeMap)</h3>
+      <p>
+        Usamos un <code>Map&lt;string, NodeData&gt;</code> para almacenar la informacion de cada nodo:
+      </p>
+
+      <pre>
+interface NodeData {
+  id: string;
+  name: string;
+  state: 'susceptible' | 'infected' | 'recovered';
+  infectedDay: number;    // Dia en que se infecto
+  infectedBy: string | null;  // Quien lo infecto (trazabilidad)
+}
+
+private nodeMap: Map&lt;string, NodeData&gt; = new Map();</pre>
+
+      <h4>Justificacion</h4>
+      <ul>
+        <li>Acceso O(1) a cualquier nodo por su ID</li>
+        <li>Almacena metadata necesaria para la simulacion (estado, dia de infeccion)</li>
+        <li>Permite trazabilidad de la cadena de contagios</li>
+      </ul>
+
+      <h3>3.3 Cola de Infectados (BFS)</h3>
+      <p>
+        Para la simulacion diaria usamos un arreglo como cola que contiene los nodos infectados activos:
+      </p>
+
+      <pre>
+// Cola de infectados para BFS
+const infectedQueue: string[] = this.getInfectedNodes().map(n => n.id);
+
+// Procesamiento BFS por niveles (un dia = un nivel)
+while (infectedQueue.length > 0) {
+  const currentId = infectedQueue.shift()!;
+  const neighbors = this.getNeighbors(currentId);
+  
+  for (const neighborId of neighbors) {
+    const neighbor = this.nodeMap.get(neighborId)!;
+    if (neighbor.state === 'susceptible') {
+      if (Math.random() < this.infectionRate) {
+        // Infectar vecino
+        neighbor.state = 'infected';
+        neighbor.infectedDay = this.currentDay;
+      }
+    }
+  }
+}</pre>
+
+      <h3>3.4 Arreglo de Historial (Reportes)</h3>
+      <p>
+        Almacenamos el estado de cada dia en un arreglo para generar graficos:
+      </p>
+
+      <pre>
+interface DailyStats {
+  day: number;
+  susceptible: number;
+  infected: number;
+  recovered: number;
+  newInfections: number;
+  newRecoveries: number;
+}
+
+private history: DailyStats[] = [];</pre>
+
+      <h3>Comparacion de Estructuras</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Operacion</th>
+            <th>Lista Adyacencia</th>
+            <th>Matriz Adyacencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Espacio</td>
+            <td><span class="complexity complexity-good">O(V + E)</span></td>
+            <td><span class="complexity complexity-ok">O(V^2)</span></td>
+          </tr>
+          <tr>
+            <td>Verificar arista</td>
+            <td><span class="complexity complexity-good">O(1) con Set</span></td>
+            <td><span class="complexity complexity-good">O(1)</span></td>
+          </tr>
+          <tr>
+            <td>Listar vecinos</td>
+            <td><span class="complexity complexity-good">O(grado)</span></td>
+            <td><span class="complexity complexity-ok">O(V)</span></td>
+          </tr>
+          <tr>
+            <td>Agregar arista</td>
+            <td><span class="complexity complexity-good">O(1)</span></td>
+            <td><span class="complexity complexity-good">O(1)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. Operaciones -->
+    <section class="section" id="operaciones">
+      <h2><span class="icon">4.</span> Operaciones Implementadas</h2>
+
+      <h3>4.1 Cargar Red desde Archivo</h3>
+      <p>Lee un archivo JSON con nodos y aristas, construyendo el grafo.</p>
+      <pre>
+loadFromJSON(data: NetworkFileFormat): void {
+  // Limpiar grafo anterior
+  this.adjacencyList.clear();
+  this.nodeMap.clear();
+  
+  // Agregar nodos
+  for (const node of data.nodes) {
+    this.addNode(node.id, node.name);
+  }
+  
+  // Agregar aristas
+  for (const edge of data.edges) {
+    this.addEdge(edge.source, edge.target);
+  }
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-good">O(V + E)</span></p>
+
+      <h3>4.2 Definir Infectados Iniciales</h3>
+      <p>Marca uno o varios nodos como infectados para iniciar la simulacion.</p>
+      <pre>
+setInitialInfected(nodeIds: string[]): void {
+  for (const id of nodeIds) {
+    const node = this.nodeMap.get(id);
+    if (node && node.state === 'susceptible') {
+      node.state = 'infected';
+      node.infectedDay = 0;
+      node.infectedBy = null; // Paciente cero
+    }
+  }
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-good">O(k)</span> donde k = cantidad de infectados iniciales</p>
+
+      <h3>4.3 Configurar Parametros</h3>
+      <p>Establece la tasa de contagio y dias de recuperacion.</p>
+      <pre>
+setParameters(infectionRate: number, recoveryDays: number): void {
+  this.infectionRate = infectionRate;  // 0.0 a 1.0
+  this.recoveryDays = recoveryDays;    // entero positivo
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-good">O(1)</span></p>
+
+      <h3>4.4 Simular Un Dia (BFS de un nivel)</h3>
+      <p>Avanza la simulacion un dia usando BFS desde los nodos infectados.</p>
+      <pre>
+simulateOneDay(): SimulationResult {
+  this.currentDay++;
+  let newInfections = 0;
+  let newRecoveries = 0;
+  
+  const infected = this.getInfectedNodes();
+  
+  // Fase 1: Intentar contagiar vecinos
+  for (const node of infected) {
+    const neighbors = this.getNeighbors(node.id);
+    for (const neighborId of neighbors) {
+      const neighbor = this.nodeMap.get(neighborId)!;
+      if (neighbor.state === 'susceptible') {
+        if (Math.random() < this.infectionRate) {
+          neighbor.state = 'infected';
+          neighbor.infectedDay = this.currentDay;
+          neighbor.infectedBy = node.id;
+          newInfections++;
+        }
+      }
+    }
+  }
+  
+  // Fase 2: Recuperar infectados antiguos
+  for (const node of infected) {
+    if (this.currentDay - node.infectedDay >= this.recoveryDays) {
+      node.state = 'recovered';
+      newRecoveries++;
+    }
+  }
+  
+  return { day: this.currentDay, newInfections, newRecoveries };
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-good">O(I * d)</span> donde I = infectados, d = grado promedio</p>
+
+      <h3>4.5 Simular Hasta Estabilizacion</h3>
+      <p>Ejecuta la simulacion hasta que no queden infectados.</p>
+      <pre>
+simulateUntilStable(): SimulationHistory {
+  while (this.getInfectedCount() > 0) {
+    this.simulateOneDay();
+    this.recordDailyStats();
+  }
+  return this.history;
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-ok">O(dias * I * d)</span></p>
+
+      <h3>4.6 Generar Reporte Diario</h3>
+      <p>Calcula y almacena estadisticas del dia actual.</p>
+      <pre>
+getDailyReport(): DailyStats {
+  return {
+    day: this.currentDay,
+    susceptible: this.getSusceptibleCount(),
+    infected: this.getInfectedCount(),
+    recovered: this.getRecoveredCount(),
+    newInfections: this.todayNewInfections,
+    newRecoveries: this.todayNewRecoveries,
+    r0Estimate: this.calculateR0()
+  };
+}</pre>
+      <p><strong>Complejidad:</strong> <span class="complexity complexity-good">O(V)</span></p>
+
+      <h3>Resumen de Complejidades</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Operacion</th>
+            <th>Tiempo</th>
+            <th>Espacio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cargar red</td>
+            <td>O(V + E)</td>
+            <td>O(V + E)</td>
+          </tr>
+          <tr>
+            <td>Definir infectados</td>
+            <td>O(k)</td>
+            <td>O(1)</td>
+          </tr>
+          <tr>
+            <td>Configurar parametros</td>
+            <td>O(1)</td>
+            <td>O(1)</td>
+          </tr>
+          <tr>
+            <td>Simular un dia</td>
+            <td>O(I * d)</td>
+            <td>O(I)</td>
+          </tr>
+          <tr>
+            <td>Simular completo</td>
+            <td>O(D * I * d)</td>
+            <td>O(D)</td>
+          </tr>
+          <tr>
+            <td>Generar reporte</td>
+            <td>O(V)</td>
+            <td>O(1)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 5. Casos de Prueba -->
+    <section class="section" id="pruebas">
+      <h2><span class="icon">5.</span> Casos de Prueba</h2>
+
+      <h3>Caso 1: Red Pequena (5 nodos lineales)</h3>
+      <div class="diagram">
+Entrada:
+  Nodos: A - B - C - D - E (linea)
+  Infectado inicial: A
+  Tasa contagio: 100%
+  Dias recuperacion: 3
+
+Salida esperada:
+  Dia 0: I=1, S=4, R=0
+  Dia 1: I=2, S=3, R=0 (B infectado)
+  Dia 2: I=3, S=2, R=0 (C infectado)
+  Dia 3: I=3, S=1, R=1 (D infectado, A recuperado)
+  Dia 4: I=3, S=0, R=2 (E infectado, B recuperado)
+  ...
+  Final: I=0, S=0, R=5 (todos recuperados)</div>
+
+      <h3>Caso 2: Red con Comunidades</h3>
+      <div class="diagram">
+Entrada:
+  Grupo A: 1-2-3 (triangulo)
+  Grupo B: 4-5-6 (triangulo)
+  Puente: 3-4
+  Infectado inicial: 1
+  Tasa contagio: 50%
+  Dias recuperacion: 5
+
+Comportamiento esperado:
+  - Primero se infecta el Grupo A
+  - Luego salta al Grupo B por el nodo 3-4
+  - El contagio es aleatorio (50% probabilidad)</div>
+
+      <h3>Caso 3: Red Grande (40 nodos, 5 comunidades)</h3>
+      <div class="diagram">
+Entrada:
+  Red de Medellin con 40 personas en 5 grupos:
+  - Familia Garcia (8 personas)
+  - Empresa TechCo (8 personas)
+  - Universidad (8 personas)
+  - Barrio Laureles (8 personas)
+  - Gimnasio (8 personas)
+  
+  12 puentes inter-grupo
+  Infectado inicial: Juan Garcia
+  Tasa: 40%, Recuperacion: 5 dias
+
+Metricas esperadas:
+  - Pico de infectados: dia 4-7
+  - Total infectados final: 60-90% de la poblacion
+  - R0 estimado: 1.5 - 2.5</div>
+    </section>
+
+    <!-- 6. Diagramas -->
+    <section class="section" id="diagramas">
+      <h2><span class="icon">6.</span> Diagramas</h2>
+
+      <h3>6.1 Diagrama del Grafo (Ejemplo)</h3>
+      <div class="diagram">
+                          Red de Contactos (5 Comunidades)
+                          
+        Familia Garcia              TechCo                Universidad
+        +----------+              +----------+            +----------+
+        | 1  2  3  |    puente    | 9  10 11 |   puente   | 17 18 19 |
+        | 4  5  6  |------------->| 12 13 14 |----------->| 20 21 22 |
+        | 7  8     |              | 15 16    |            | 23 24    |
+        +----------+              +----------+            +----------+
+              |                        |                       |
+              |                        |                       |
+              v                        v                       v
+        +----------+              +----------+
+        | Barrio   |    puente    | Gimnasio |
+        | 25-32    |<------------>| 33-40    |
+        +----------+              +----------+
+        
+        Leyenda:
+        -----> Puentes inter-grupo (permiten propagacion entre comunidades)
+        Numeros = IDs de nodos (personas)</div>
+
+      <h3>6.2 Flujo del Algoritmo BFS</h3>
+      <div class="diagram">
+                              FLUJO DE SIMULACION
+        
+        +------------------+
+        |  Cargar Red JSON |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        | Seleccionar      |
+        | Infectados       |
+        | Iniciales        |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        | Configurar       |
+        | Parametros       |
+        | (tasa, dias)     |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        | SIMULACION       |<-----------+
+        | Un Dia (BFS)     |            |
+        +--------+---------+            |
+                 |                      |
+                 v                      |
+        +------------------+            |
+        | Para cada        |            |
+        | infectado:       |            |
+        | - Revisar        |            |
+        |   vecinos        |            |
+        | - Intentar       |            |
+        |   contagiar      |            |
+        +--------+---------+            |
+                 |                      |
+                 v                      |
+        +------------------+            |
+        | Recuperar        |            |
+        | infectados       |            |
+        | antiguos         |            |
+        +--------+---------+            |
+                 |                      |
+                 v                      |
+        +------------------+    NO      |
+        | Quedan           |------------+
+        | infectados?      |
+        +--------+---------+
+                 | SI (0 infectados)
+                 v
+        +------------------+
+        | Generar Reporte  |
+        | Final            |
+        +------------------+</div>
+
+      <h3>6.3 Transiciones de Estado</h3>
+      <div class="diagram">
+        MAQUINA DE ESTADOS - MODELO SIR
+        
+        +---------------+         +---------------+         +---------------+
+        |               |  p(t)   |               |  d dias |               |
+        |  SUSCEPTIBLE  |-------->|   INFECTADO   |-------->|  RECUPERADO   |
+        |     (S)       |         |      (I)      |         |      (R)      |
+        |               |         |               |         |               |
+        +---------------+         +---------------+         +---------------+
+              Azul                     Rojo                     Verde
+        
+        Donde:
+        - p(t) = probabilidad de contagio al tener contacto con infectado
+        - d = dias hasta recuperacion (parametro configurable)</div>
+
+      <h3>6.4 Capturas del Sistema</h3>
+      <div class="screenshot">
+        [Aqui van capturas de pantalla del simulador funcionando]<br><br>
+        Sugerencias de capturas:<br>
+        1. Vista inicial con red cargada<br>
+        2. Seleccion de infectados iniciales<br>
+        3. Simulacion en progreso (propagacion visible)<br>
+        4. Graficos de evolucion SIR<br>
+        5. Reporte final de la epidemia
+      </div>
+    </section>
+
+    <!-- 7. Ejecucion -->
+    <section class="section" id="ejecucion">
+      <h2><span class="icon">7.</span> Instrucciones de Ejecucion</h2>
+
+      <h3>Requisitos</h3>
+      <ul>
+        <li>Node.js 18+ instalado</li>
+        <li>npm o pnpm</li>
+        <li>Navegador moderno (Chrome, Firefox, Edge)</li>
+      </ul>
+
+      <h3>Instalacion</h3>
+      <pre>
+# Clonar el repositorio
+git clone https://github.com/[tu-usuario]/simulador-propagacion-epidemia.git
+
+# Entrar al directorio
+cd simulador-propagacion-epidemia
+
+# Instalar dependencias
+pnpm install   # o npm install
+
+# Ejecutar en desarrollo
+pnpm dev       # o npm run dev
+
+# Abrir en el navegador
+# http://localhost:3000</pre>
+
+      <h3>Uso del Simulador</h3>
+      <ol>
+        <li><strong>Cargar Red:</strong> Click en "Cargar red ejemplo" o sube tu propio JSON</li>
+        <li><strong>Seleccionar Infectados:</strong> Click en los nodos que quieres infectar inicialmente</li>
+        <li><strong>Configurar:</strong> Ajusta tasa de contagio (0-100%) y dias de recuperacion</li>
+        <li><strong>Simular:</strong> Click en "+1 Dia" para avanzar paso a paso, o "Auto" para simulacion completa</li>
+        <li><strong>Analizar:</strong> Observa los graficos y reportes generados</li>
+      </ol>
+
+      <h3>Formato del Archivo JSON</h3>
+      <pre>
+{
+  "metadata": {
+    "name": "Nombre de la red",
+    "description": "Descripcion",
+    "nodeCount": 10,
+    "edgeCount": 15
+  },
+  "nodes": [
+    { "id": "1", "name": "Persona 1" },
+    { "id": "2", "name": "Persona 2" }
+  ],
+  "edges": [
+    { "source": "1", "target": "2" },
+    { "source": "2", "target": "3" }
+  ]
+}</pre>
+    </section>
+
+    <!-- 8. Limitaciones -->
+    <section class="section" id="limitaciones">
+      <h2><span class="icon">8.</span> Limitaciones y Posibles Mejoras</h2>
+
+      <h3>Limitaciones Actuales</h3>
+      <ul>
+        <li><strong>Sin periodo de incubacion:</strong> Los infectados contagian desde el dia 1</li>
+        <li><strong>Tasa uniforme:</strong> Todos los contactos tienen la misma probabilidad de contagio</li>
+        <li><strong>Sin mortalidad:</strong> El modelo no incluye muertes</li>
+        <li><strong>Red estatica:</strong> Los contactos no cambian durante la simulacion</li>
+        <li><strong>Sin vacunacion:</strong> No hay forma de inmunizar nodos</li>
+      </ul>
+
+      <h3>Posibles Mejoras</h3>
+      <ul>
+        <li><strong>Modelo SEIR:</strong> Agregar estado "Expuesto" con periodo de incubacion</li>
+        <li><strong>Aristas ponderadas:</strong> Diferentes probabilidades segun tipo de contacto</li>
+        <li><strong>Vacunacion:</strong> Inmunizar nodos estrategicos</li>
+        <li><strong>Cuarentena:</strong> Aislar nodos detectados como infectados</li>
+        <li><strong>Redes dinamicas:</strong> Cambiar contactos segun el dia de la semana</li>
+        <li><strong>Importar redes reales:</strong> Integrar con datos de redes sociales</li>
+        <li><strong>Multiples enfermedades:</strong> Simular varias epidemias simultaneamente</li>
+      </ul>
+    </section>
+
+    <!-- 9. Sustentacion -->
+    <section class="section" id="sustentacion">
+      <h2><span class="icon">9.</span> Guia para la Sustentacion Oral (8-10 min)</h2>
+
+      <h3>Timeline de la Presentacion</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">Minuto 0-1</div>
+          <div class="timeline-title">Introduccion</div>
+          <div class="timeline-content">
+            Presentarse, nombrar el proyecto y explicar brevemente el contexto de las pandemias.
+            <blockquote>"Buenas, somos [nombres] y les vamos a presentar EPIDEMIA, un simulador de propagacion de enfermedades. Despues de vivir la pandemia de COVID, quisimos entender como se propagan las enfermedades usando estructuras de datos."</blockquote>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Minuto 1-3</div>
+          <div class="timeline-title">Modelo y Estructuras de Datos</div>
+          <div class="timeline-content">
+            Explicar el grafo, el modelo SIR, y las estructuras usadas.
+            <blockquote>"Usamos una lista de adyacencia con Map y Set que nos da O(1) para buscar conexiones. Cada nodo tiene un estado: Susceptible, Infectado o Recuperado."</blockquote>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Minuto 3-7</div>
+          <div class="timeline-title">Demostracion en Vivo</div>
+          <div class="timeline-content">
+            <strong>Paso 1:</strong> Cargar la red de ejemplo (40 nodos)<br>
+            <strong>Paso 2:</strong> Seleccionar infectado inicial (click en un nodo)<br>
+            <strong>Paso 3:</strong> Configurar parametros (sliders)<br>
+            <strong>Paso 4:</strong> Simular dia por dia mostrando la propagacion BFS<br>
+            <strong>Paso 5:</strong> Mostrar los graficos de evolucion
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Minuto 7-9</div>
+          <div class="timeline-title">Analisis Tecnico</div>
+          <div class="timeline-content">
+            Explicar la complejidad del algoritmo y justificar las estructuras.
+            <blockquote>"El BFS tiene complejidad O(I * d) donde I es infectados y d es el grado promedio. Elegimos lista de adyacencia porque nuestra red es dispersa."</blockquote>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">Minuto 9-10</div>
+          <div class="timeline-title">Conclusion</div>
+          <div class="timeline-content">
+            Resumir operaciones implementadas, limitaciones y mejoras futuras.
+            <blockquote>"Implementamos todas las operaciones pedidas. Como mejora futura podriamos agregar vacunacion y periodo de incubacion. Gracias, quedamos atentos a preguntas."</blockquote>
+          </div>
+        </div>
+      </div>
+
+      <h3>Preguntas Frecuentes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Pregunta</th>
+            <th>Respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Por que lista de adyacencia y no matriz?</td>
+            <td>Porque la red es dispersa. Usamos O(V+E) en vez de O(V^2) de memoria.</td>
+          </tr>
+          <tr>
+            <td>Cual es la complejidad del BFS?</td>
+            <td>O(V+E) en general, pero nosotros solo recorremos desde infectados: O(I*d).</td>
+          </tr>
+          <tr>
+            <td>Que pasa si la tasa es 100%?</td>
+            <td>Todos los susceptibles conectados a infectados se contagian cada dia.</td>
+          </tr>
+          <tr>
+            <td>Como calculan el R0?</td>
+            <td>Promedio de nuevos infectados dividido por los infectados que los causaron.</td>
+          </tr>
+          <tr>
+            <td>Por que usaron TypeScript?</td>
+            <td>Para tener tipado fuerte y evitar errores en tiempo de ejecucion.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Tips Finales</h3>
+      <ul>
+        <li>Ten la pagina cargada antes de empezar</li>
+        <li>Practica la demo al menos una vez</li>
+        <li>Si algo falla, recarga y carga la red de ejemplo</li>
+        <li>Habla con seguridad - tu hiciste el codigo</li>
+        <li>Dividanse: uno explica teoria, el otro hace la demo</li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>EPIDEMIA - Simulador de Propagacion Epidemica</p>
+      <p>Estructuras de Datos - Universidad de Medellin - 2024</p>
+      <p>Hecho con Next.js, D3.js, Recharts y mucho cafe</p>
+    </footer>
+
+  </div>
+</body>
+</html>
