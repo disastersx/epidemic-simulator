@@ -218,6 +218,6 @@ Este proyecto es de código abierto bajo la licencia MIT.
 
 Hecho con ❤️ en Medellín, Colombia
 
-**Universidad de Medellín - Estructuras de Datos 2026**
+**Pascualbravo- Estructuras de Datos 2026**
 
 </div>
