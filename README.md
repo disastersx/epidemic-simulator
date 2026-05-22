@@ -201,7 +201,7 @@ Ver [documentación completa](./docs/DOCUMENTO_TECNICO.md) para más detalles.
 ## Presentación del Proyecto
 
 [Ver Presentación Interactiva](https://v0-epidemic-simulator.vercel.app/?_vercel_share=SE2J1DD8a0pBFgYywkUbsqmygmPdIhwW)
-
+https://v0-epidemic-simulator-presentation.vercel.app/
 ---
 
 ## 👥 Autores
