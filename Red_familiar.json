@@ -1,0 +1,29 @@
+{
+  "nombre": "Red Familiar",
+  "descripcion": "Núcleo familiar con abuelos - 8 personas",
+  "nodos": [
+    { "id": 0, "nombre": "Abuelo", "edad": 72 },
+    { "id": 1, "nombre": "Abuela", "edad": 68 },
+    { "id": 2, "nombre": "Papá", "edad": 45 },
+    { "id": 3, "nombre": "Mamá", "edad": 43 },
+    { "id": 4, "nombre": "Hijo Mayor", "edad": 18 },
+    { "id": 5, "nombre": "Hija Menor", "edad": 14 },
+    { "id": 6, "nombre": "Tío", "edad": 40 },
+    { "id": 7, "nombre": "Prima", "edad": 16 }
+  ],
+  "aristas": [
+    { "origen": 0, "destino": 1 },
+    { "origen": 0, "destino": 2 },
+    { "origen": 0, "destino": 6 },
+    { "origen": 1, "destino": 2 },
+    { "origen": 1, "destino": 6 },
+    { "origen": 2, "destino": 3 },
+    { "origen": 2, "destino": 4 },
+    { "origen": 2, "destino": 5 },
+    { "origen": 3, "destino": 4 },
+    { "origen": 3, "destino": 5 },
+    { "origen": 4, "destino": 5 },
+    { "origen": 6, "destino": 7 },
+    { "origen": 4, "destino": 7 }
+  ]
+}
